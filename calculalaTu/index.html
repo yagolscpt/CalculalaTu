@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="libs/p5.min.js"></script>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+      .calculus {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>La esfera</h1>
+    <div class="container">
+      <div class="calculus">
+        <div>
+          <div>Introduce el radio de la esfera</div>
+          <input type="number" id="radio" value="40" />
+        </div>
+      </div>
+      <!--  Fin calculus -->
+      <div>
+        <div>Area de la esfera</div>
+        <div id="area"></div>
+      </div>
+      <div>
+        <div>Volumen de la esfera</div>
+        <div id="volume"></div>
+      </div>
+    </div> <!-- Fin constainer -->
+
+    <script>
+      function setup() {
+        createCanvas(400, 400, WEBGL);
+      }
+      function draw() {
+        circle(30, 30, 20);
+        background(255, 255, 255);
+        orbitControl(); // Añadido por mí para girar la esfera
+        // translate(0, -100,0)
+        rotateY(millis() / 1000);
+        // rotateX(millis() / 1000)
+        // rotateZ(millis() / 1000)
+        const r = document.querySelector("#radio").value;
+        sphere(r);
+      }
+    </script>
+    <script>
+      document.querySelector("#radio").addEventListener("keyup", (e) => {
+        const r = e.target.value;
+        // const r = document.querySelector("#radio").value;
+        const area = 4 * Math.PI * r * r;
+        const volume = (4 / 3) * Math.PI * r * r * r;
+
+        document.querySelector("#radio").innerHTML = area.toFixed(2);
+        document.querySelector("#radio").innerHTML = volume.toFixed(2);
+      });
+    </script>
+  </body>
+</html>
